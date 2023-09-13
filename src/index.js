@@ -4,7 +4,9 @@ import { server, w3cwebsocket } from 'websocket';
 import { Card, Avatar, Input, Typography } from 'antd';
 import './index.css';
 
-const client = new w3cwebsocket('wss://78.26.151.4:8000', { transports: ['websocket'] });
+const client = new w3cwebsocket('wss://78.26.151.4:8000', {
+  rejectUnauthorized: false
+}, 'echo-protocol');
 
 const App = () => {
   const [state, setState] = useState({
@@ -17,6 +19,9 @@ const App = () => {
   useEffect(() => {
     client.onopen = () => {
       console.log('websocket client connected');
+    };
+    client.onerror = () => {
+      console.log('websocket connection error');
     };
 
     client.onmessage = (message) => {
