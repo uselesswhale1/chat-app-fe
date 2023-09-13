@@ -1,12 +1,10 @@
-import { useEffect, ChangeEvent, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { server, w3cwebsocket } from 'websocket';
+import { w3cwebsocket } from 'websocket';
 import { Card, Avatar, Input, Typography } from 'antd';
 import './index.css';
 
-const client = new w3cwebsocket('wss://78.26.151.4:8000', {
-  rejectUnauthorized: false
-}, 'echo-protocol');
+const client = new w3cwebsocket('wss://78.26.151.4:8000', 'echo-protocol');
 
 const App = () => {
   const [state, setState] = useState({
